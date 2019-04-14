@@ -1,7 +1,7 @@
 Name:           cmocka
-Version:        1.1.2
-#Release:        1%{?dist}
-Release:        0.1%{?dist}
+Version:        1.1.3
+#Release:        1%%{?dist}
+Release:        0%{?dist}
 
 License:        ASL 2.0
 Summary:        An elegant unit testing framework for C with support for mock objects
@@ -12,7 +12,7 @@ Source1:        https://cmocka.org/files/1.1/%{name}-%{version}.tar.xz.asc
 Source2:        cmocka.keyring
 
 BuildRequires:  gcc
-BuildRequires:  cmake3
+BuildRequires:  cmake
 BuildRequires:  doxygen
 BuildRequires:  glibc-devel
 BuildRequires:  gnupg2
@@ -40,7 +40,6 @@ preferable.
 This is the successor of Google's Cmockery.
 
 %package -n libcmocka
-Group:          Development/Libraries
 Summary:        Lightweight library to simplify and generalize unit tests for C
 
 Conflicts: cmockery2
@@ -68,14 +67,12 @@ preferable.
 This is the successor of Google's Cmockery.
 
 %package -n libcmocka-static
-Group:          Development/Libraries
 Summary:        Lightweight library to simplify and generalize unit tests for C
 
 %description -n libcmocka-static
 Static version of the cmocka library.
 
 %package -n libcmocka-devel
-Group:          Development/Libraries
 Summary:        Development headers for the cmocka library
 Requires:       libcmocka = %{version}-%{release}
 
@@ -92,7 +89,7 @@ if test ! -e "obj"; then
   mkdir obj
 fi
 pushd obj
-%cmake3 \
+%cmake \
   -DWITH_STATIC_LIB=ON \
   -DWITH_CMOCKERY_SUPPORT=ON \
   -DUNIT_TESTING=ON \
@@ -112,12 +109,9 @@ ln -s libcmocka.so %{buildroot}%{_libdir}/libcmockery.so
 
 %postun -n libcmocka -p /sbin/ldconfig
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %check
 pushd obj
-ctest3 --output-on-failure
+ctest --output-on-failure
 popd
 
 %files -n libcmocka
@@ -126,7 +120,7 @@ popd
 %{_libdir}/libcmocka.so.*
 
 %files -n libcmocka-static
-%{_libdir}/libcmocka.a
+%{_libdir}/libcmocka-static.a
 
 %files -n libcmocka-devel
 %doc obj/doc/html
@@ -141,14 +135,29 @@ popd
 %{_libdir}/cmake/cmocka/cmocka-config.cmake
 
 %changelog
-* Sat Dec 15 2018 Nico Kadel-Garcia <nkadel@gmail.com> - 1.1.2-0.1
-- Backport to RHEL 7
+* Thu Sep 27 2018 Andreas Schneider <asn@redhat.com> - 1.1.3-1
+- Update to version 1.1.3
 
 * Wed Aug 29 2018 Andreas Schneider <asn@redhat.com> - 1.1.2-1
 - Update to version 1.1.2
 
-* Fri Apr 07 2017 Andreas Schneider <asn@redhat.com> - 1.1.1-0
-- Update to version 1.1.1
+* Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.1-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.1-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.1-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.1-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Tue Mar 28 2017 Than Ngo <than@redhat.com> - 1.1.0-5
+- added workaround for gcc7 bug on ppc64le temporary 
+
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
 * Wed Sep 21 2016 Jakub Hrozek <jhrozek@redhat.com> - 1.1.0-1
 - Update to version 1.1.0
@@ -161,6 +170,12 @@ popd
     * Improved documentation
     * Fixed XML output generataion
     * Fixed Windows builds with VS2015
+
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
 * Thu Mar 12 2015 Andreas Schneider <asn@redhat.com> - 1.0.1-1
 - Update to version 1.0.1:
@@ -181,6 +196,12 @@ popd
   * Added a cmockery compat header
   * Fixed a lot of bugs on Windows
 
+* Sat Aug 16 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Mon May 26 2014 - Andreas Schneider <asn@redhat.com> - 0.4.1-1
 - Update to version 0.4.1.
 
@@ -190,6 +211,9 @@ popd
 * Wed Nov 06 2013 - Andreas Schneider <asn@redhat.com> - 0.3.2-1
 - Update to version 0.3.2.
 - Include API documentation.
+
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
 * Wed Jul 10 2013 - Andreas Schneider <asn@redhat.com> - 0.3.0-2
 - Update to version 0.3.1.
