@@ -11,7 +11,7 @@ Source0:        https://cmocka.org/files/1.1/%{name}-%{version}.tar.xz
 Source1:        https://cmocka.org/files/1.1/%{name}-%{version}.tar.xz.asc
 Source2:        cmocka.keyring
 
-%if 0%{?rhel} == 7
+%if (0%{?rhel > 0 && 0%{?rhel} <= 7)
 # Addresses python36- versus python3- dependencies
 BuildRequires: epel-rpm-macros
 %endif
