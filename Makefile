@@ -6,7 +6,7 @@
 LANG=C
 
 # doxygen needed for RHEL 8 beta
-#MOCKS+=samba4repo-8-x86_64
+MOCKS+=samba4repo-8-x86_64
 
 #REPOBASEDIR=/var/www/linux/samba4repo
 REPOBASEDIR:=`/bin/pwd`/../samba4repo
