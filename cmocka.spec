@@ -1,7 +1,7 @@
 Name:           cmocka
 Version:        1.1.3
 #Release:        1%%{?dist}
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 
 License:        ASL 2.0
 Summary:        An elegant unit testing framework for C with support for mock objects
@@ -10,11 +10,6 @@ URL:            https://cmocka.org
 Source0:        https://cmocka.org/files/1.1/%{name}-%{version}.tar.xz
 Source1:        https://cmocka.org/files/1.1/%{name}-%{version}.tar.xz.asc
 Source2:        cmocka.keyring
-
-%if 0%{?rhel} > 0
-# Addresses python36- versus python3- dependencies
-BuildRequires: epel-rpm-macros
-%endif
 
 BuildRequires:  gcc
 BuildRequires:  cmake

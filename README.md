@@ -1,7 +1,7 @@
 cmocka-1.2.x-srpm
 =================
 
-SRPM building tools for cmocka-1.2.x for runing Samba 4 on RHEL 6.
+SRPM building tools for cmocka-1.2.x for runing Samba 4 on Amazon Linux 2
 
 This tool taken from the EPEL 7 release.
 The set of tools need to be built and installed in the following order.
