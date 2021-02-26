@@ -11,13 +11,8 @@ Source0:        https://cmocka.org/files/1.1/%{name}-%{version}.tar.xz
 Source1:        https://cmocka.org/files/1.1/%{name}-%{version}.tar.xz.asc
 Source2:        cmocka.keyring
 
-%if 0%{?rhel} > 0
-# Addresses python36- versus python3- dependencies
-BuildRequires: epel-rpm-macros
-%endif
-
 BuildRequires:  gcc
-BuildRequires:  cmake
+BuildRequires:  cmake3
 BuildRequires:  doxygen
 BuildRequires:  glibc-devel
 BuildRequires:  gnupg2
@@ -94,7 +89,7 @@ if test ! -e "obj"; then
   mkdir obj
 fi
 pushd obj
-%cmake \
+%cmake3 \
   -DWITH_STATIC_LIB=ON \
   -DWITH_CMOCKERY_SUPPORT=ON \
   -DUNIT_TESTING=ON \

@@ -6,10 +6,10 @@
 LANG=C
 
 #MOCKS+=samba4repo-8-x86_64
-MOCKS+=epel-8-x86_64
+MOCKS+=samba4repo-amz2-x86_64
 
 #MOCKCFGS+=$(MOCKS)
-MOCKCFGS+=samba4repo-8-x86_64
+#MOCKCFGS+=samba4repo-amz2-x86_64
 
 #REPOBASEDIR=/var/www/linux/samba4repo
 REPOBASEDIR:=`/bin/pwd`/../samba4repo
