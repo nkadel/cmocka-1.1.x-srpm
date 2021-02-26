@@ -111,7 +111,7 @@ ln -s libcmocka.so %{buildroot}%{_libdir}/libcmockery.so
 
 %check
 pushd obj
-ctest --output-on-failure
+ctest3 --output-on-failure
 popd
 
 %files -n libcmocka
